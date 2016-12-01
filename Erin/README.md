@@ -1,2 +1,2 @@
 # TheOrganicMecanique
-asdasdasd
+This is the code for the mechanical tree. The movenment is fairly complex and as of now, I am trying to figure out how to get the tree to branch off from an anchored branch at the corner of the screen as opposed branching from the center of the tree.
