@@ -15,6 +15,7 @@ float stemLife;
 float stemColor;
 float stemFruit;
 int deathCount = 0;
+float diameter;
 
 
 class Crack{
@@ -51,6 +52,7 @@ class Crack{
   void update(){
     if (alive){
       fill(cColor);
+      noStroke();
       ellipse(cPos.x, cPos.y, cSize,cSize);
       /*
       cVel.x += (random(-.01,.01));
@@ -74,7 +76,7 @@ class Crack{
     cVel.x = cVel.y;
     cVel.y = t;
     if (round(random(0,1))==1){
-      cVel.mult(-1);
+      cVel.mult(1);
       cPause = 20;
       cChoice = 0;
       
@@ -99,7 +101,7 @@ class Crack{
        cPos = new PVector(stemPosX,stemPosY);
     cVel = new PVector(stemVelX,stemVelY);
     if (round(random(0,1))==1){
-      cVel.mult(-1);
+      cVel.mult(1);
     }
     cColor = stemColor;
     fColor = stemFruit;
@@ -110,7 +112,6 @@ class Crack{
     cPause = 20;
   }
   void fruit(){
-    float fruitSize = random(20);
     
     for (int f =0; f<random(-2,5);f++){
       float fPosX = cPos.x+random(-30,30);
@@ -118,9 +119,10 @@ class Crack{
       /*strokeWeight(cSize);
       stroke(cColor-cLife/5,750-cLife/3,750-cLife/3);
       line(cPos.x,cPos.y,fPosX,+fPosY);*/
-      noStroke();
+      stroke(0);
+      
       fill(fColor,800,800);
-      ellipse(fPosX,fPosY,fruitSize,fruitSize);
+      ellipse(stemPosX,stemPosY,cSize*4,cSize*4);
     }
     cPause = 20;
   }
@@ -174,20 +176,3 @@ void mousePressed(){
     k=0;
   }
 }
- void keyPressed(){
-  if (key == 'p'){
-    saveFrame();
-  }
-  if (key =='n'){
-    background(111,111,811);
- }
- if (key =='k'){
-    for (int m = 0;m <numCracks; m++){
-      cracks[m].alive = false;
-    }
-   deathCount+=50;
-    background(111,111,811-deathCount);
-    fill(111,111,deathCount);
-    text("you monster",50,50);
- }
- }
