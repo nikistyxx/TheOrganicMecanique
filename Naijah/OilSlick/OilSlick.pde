@@ -4,8 +4,8 @@ float[][] z, v, a;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-  size(950, 650);
-  colorMode(RGB, 3);
+  size(950, 650); //changed screensize
+  colorMode(RGB, 3); //changed brightness
   z = new float[width][height];
   v = new float[width][height];
   a = new float[width][height];
@@ -18,7 +18,7 @@ void draw() {
   for (int x = 1; x < width-1; x++) {
     for (int y = 1; y < height-1; y++) {
       a[x][y] = (v[x-1][y] + v[x+(-1)][y] + v[x+1][y-1] + v[x][y-1])/4 - v[x][y];
-    }
+    } //changed x and y values, affects angle of color bleed
   }
   for (int x = 1; x < width-1; x++) {
     for (int y = 1; y < height-1; y++) {
