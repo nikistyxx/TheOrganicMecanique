@@ -20,7 +20,7 @@ class pathfinder {
   }
   
   void update() {
-    
+ //change from original minimum diameter to a bigger minimum, so there'll be less thin branches   
     if (diameter>2) {
       location.add(velocity);
       
@@ -56,6 +56,7 @@ class pathfinder {
 
 //runner
 pathfinder[] paths;
+//to fix the size error
 void settings(){
   size(800, 600);
 }
