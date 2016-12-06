@@ -53,8 +53,8 @@ void draw() {
     paths[i].update();
   }
   
-  stroke(50);
-  fill(100);
+  stroke(70);
+  fill(150);
     for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){
