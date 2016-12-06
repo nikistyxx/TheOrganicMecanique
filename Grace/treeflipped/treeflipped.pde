@@ -2,7 +2,7 @@ pathfinder[] paths;
 void setup() {
   size(800, 600);
   background(0);
-  ellipseMode(CENTER);
+  //ellipseMode(CENTER);
   fill(255);
   noStroke();
   smooth();
