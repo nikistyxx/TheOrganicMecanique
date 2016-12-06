@@ -12,7 +12,7 @@ class Crack{
   int cID;
   
   Crack(float cXtemp, float cYtemp, int cIDtemp){
-    cPos = new PVector(cXtemp, cYtemp);
+    cPos = new PVector(width, height);
     cColor = 100;
     fColor = random(1000);
     alive = false;
@@ -22,7 +22,7 @@ class Crack{
     //METHODS GO HERE
   //creates plant
   void plant(){
-    cPos = new PVector(mouseX,mouseY);
+    cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
     cLife = 1000 - deathCount;
     cSize = cLife/25;
@@ -34,7 +34,6 @@ class Crack{
   void update(){
     if (alive){
       fill(cColor);
-      noStroke();
       ellipse(cPos.x, cPos.y, cSize,cSize);
       /*
       cVel.x += (random(-.01,.01));

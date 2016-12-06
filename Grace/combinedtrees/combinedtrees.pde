@@ -18,7 +18,6 @@ float diameter;
 void setup() {
   size(800, 600);
   background(0);
-  noStroke();
   smooth();
   paths = new pathfinder[1];
   paths[0] = new pathfinder();
@@ -28,9 +27,14 @@ void setup() {
   cracks = new Crack[numCracks];
   
   for(int i = 0;i<cracks.length; i++){
-    cracks[i] = new Crack(mouseX,mouseY,i);
+    cracks[i] = new Crack(width,height,i);
   }
   
+    cracks[k].plant();
+  k++;
+  if (k>=numCracks){
+    k=0;
+  }
   
   
 }
@@ -41,6 +45,7 @@ void setup() {
 
 void draw() {
   fill(255);
+  noStroke();
   for (int i=0;i<paths.length;i++) {
     PVector loc = paths[i].location;
     float diam = paths[i].diameter;
@@ -48,6 +53,7 @@ void draw() {
     paths[i].update();
   }
   
+  stroke(50);
   fill(100);
     for (int j=0; j<numCracks; j++){
     cracks[j].update();
@@ -57,7 +63,7 @@ void draw() {
        }
     }
     if (cracks[j].cChoice == 2||cracks[j].cChoice == 3){
-      if(cracks[j].cLife < 800){
+      if(cracks[j].cLife < 750){
          cracks[j].stemSave();
          cracks[k].stem();
          k++;
