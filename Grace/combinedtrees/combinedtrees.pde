@@ -1,5 +1,6 @@
 pathfinder[] paths;
 Crack[] cracks;
+//all variables for digitaltree
 int numCracks = 100;
 int k = 0;
 float stemPosX;
@@ -14,13 +15,9 @@ float diameter;
 
 
 
-
-
 void setup() {
   size(800, 600);
   background(0);
-  //ellipseMode(CENTER);
-  //fill(255);
   noStroke();
   smooth();
   paths = new pathfinder[1];
