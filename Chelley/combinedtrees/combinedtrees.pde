@@ -1,6 +1,5 @@
 //Oil slick
-import java.util.Arrays;
-float[][] z, v, a;
+float[][] z1, v1, z2, v2;
 
 
 pathfinder[] paths;
@@ -25,17 +24,18 @@ PGraphics mechTree;
 
 void setup() {
 
-  size(800, 600);
+  size(800, 600,P2D);
   //pixelDensity(2);
   background(0);
   smooth();
   
 //oil slick rgb double arrays
-  colorMode(RGB, 3); //changed brightness
-  z = new float[width][height];
-  v = new float[width][height];
-  a = new float[width][height];
-  
+  colorMode(RGB, 2);
+  z1 = new float[width][height];
+  v1 = new float[width][height];
+  z2 = new float[width][height];
+  v2 = new float[width][height];
+
   
   natTree= createGraphics(width,height);
   mechTree= createGraphics(width,height);
@@ -59,6 +59,7 @@ void setup() {
   }
   
   
+  
 }
 
 
@@ -67,25 +68,28 @@ void setup() {
 
 void draw() {
 
-  
- 
-  
-   loadPixels();
+//Oil Sick/////////////////////////////////////////////////////
+  loadPixels();
+
   for (int x = 1; x < width-1; x++) {
     for (int y = 1; y < height-1; y++) {
-      a[x][y] = (v[x-1][y] + v[x+(-1)][y] + v[x+1][y-1] + v[x][y-1])/4 - v[x][y];
-    } //changed x and y values, affects angle of color bleed
-  }
-  for (int x = 1; x < width-1; x++) {
-    for (int y = 1; y < height-1; y++) {
-      v[x][y] += a[x][y];
-      z[x][y] += v[x][y];
-      
-      pixels[width*y+x] = color(sin(z[x][y]) + 1, cos(z[x][y]), 2);
+      v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * 0.25 - z1[x][y];
+      v2[x][y] += (z2[x-1][y] + z2[x+1][y] + z2[x][y-1] + z2[x][y+1] + z1[x][y]) * 0.25 - z2[x][y];
     }
   }
-  updatePixels();
   
+  for (int x = 1; x < width-1; x++) {
+    for (int y = 1; y < height-1; y++) {
+      z1[x][y] += v1[x][y];
+      z2[x][y] += v2[x][y];
+      z1[x][y] = constrain(z1[x][y], -1, 1);
+      z2[x][y] = constrain(z2[x][y], -1, 1);
+      pixels[width*y+x] = color(v1[x][y] + 1, v2[x][y] + 1, 2);
+    }
+  }
+  
+  updatePixels();
+
   
   
 //Natural Tree//////////////////////////////////////////////////////
@@ -108,7 +112,7 @@ void draw() {
 
   
  //Mechanical Tree//////////////////////////////////////////////////////
- mechTree.beginDraw();
+  mechTree.beginDraw();
   mechTree.fill(100);
 
   stroke(70);
@@ -140,26 +144,21 @@ void draw() {
   }
   mechTree.endDraw();
   
-  
+  blendMode(ADD);
   image(natTree,0,0);
   image(mechTree,0,0);
+  //natTree.filter(BLUR,2);
   
+
 }
 
 
 
-void move() {
-  if (mouseX > -1    &&    mouseX < width    &&    mouseY > 2    &&    mouseY < height) {
-    v[mouseX][mouseY] = randomGaussian() * TAU;
-  }}
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void mouseClicked() { move(); }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void mouseDragged() { move(); }
+void mouseMoved() {
+  v1[mouseX][mouseY] = randomGaussian();
+  v2[mouseX][mouseY] = randomGaussian();
+}
 
 void mousePressed() {
   

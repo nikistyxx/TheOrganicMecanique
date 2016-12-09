@@ -48,7 +48,7 @@ class pathfinder {
       }
       
      //splits existing branch to create new branches 2% of the time
-      if (random(0, 1)<0.02) {
+      if (random(0, 1)<0.01) {
         paths = (pathfinder[]) append(paths, new pathfinder(this));
       }
     }
