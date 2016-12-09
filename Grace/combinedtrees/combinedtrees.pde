@@ -1,7 +1,7 @@
 pathfinder[] paths;
 Crack[] cracks;
 //all variables for digitaltree
-int numCracks = 100;
+int numCracks = 50;
 int k = 0;
 float stemPosX;
 float stemPosY;
@@ -23,14 +23,14 @@ void setup() {
   paths[0] = new pathfinder();
   
   
-    //initialize cracks array
+  //initialize cracks array
   cracks = new Crack[numCracks];
   
   for(int i = 0;i<cracks.length; i++){
     cracks[i] = new Crack(width,height,i);
   }
   
-    cracks[k].plant();
+  cracks[k].plant();
   k++;
   if (k>=numCracks){
     k=0;
@@ -58,12 +58,12 @@ void draw() {
     for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){
-      if(cracks[j].cLife < 750){
+      if(cracks[j].cLife < 800){
          cracks[j].turn();
        }
     }
     if (cracks[j].cChoice == 2||cracks[j].cChoice == 3){
-      if(cracks[j].cLife < 750){
+      if(cracks[j].cLife < 800){
          cracks[j].stemSave();
          cracks[k].stem();
          k++;

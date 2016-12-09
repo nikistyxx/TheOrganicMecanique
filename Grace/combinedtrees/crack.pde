@@ -20,7 +20,7 @@ class Crack{
     cChoice = 0;
   }
     //METHODS GO HERE
-  //creates plant
+  //creates new branch
   void plant(){
     cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
@@ -44,7 +44,7 @@ class Crack{
       cSize = cLife/25;
       cPause--;
       if (cPause <= 0){
-      cChoice = round(random(300));
+      cChoice = round(random(200));
       }
     }
     if (cLife < 0){
