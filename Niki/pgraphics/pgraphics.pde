@@ -1,8 +1,7 @@
-PGraphics oilslick;
 PGraphics treez;
 
 import java.util.Arrays;
-float[][] z, v, a;
+float[][] z1, v1, z2, v2;
 //combined tree
 pathfinder[] paths;
 Crack[] cracks;
@@ -24,23 +23,21 @@ float diameter;
 
 void setup() {
   size(950, 650); //changed screensize
-  colorMode(RGB, 3); //changed brightness
-  oilslick = createGraphics(width, height);
-  treez = createGraphics(width, height);
-  
   //oilslick
-  z = new float[width][height];
-  v = new float[width][height];
-  a = new float[width][height];
+ colorMode(RGB, 2);
+  background(1, 1, 2);
+  z1 = new float[width][height];
+  v1 = new float[width][height];
+  z2 = new float[width][height];
+  v2 = new float[width][height];
   loadPixels();
-  background(0);
-  
+  treez= createGraphics(width,height);
   //treez
   smooth();
   paths = new pathfinder[1];
   paths[0] = new pathfinder();
   
-    //initialize cracks array
+    //initialize cracks array mechanical tree
   cracks = new Crack[numCracks];
   for(int i = 0;i<cracks.length; i++){
     cracks[i] = new Crack(width,height,i);
@@ -59,36 +56,33 @@ void draw() {
   //oilslick
   for (int x = 1; x < width-1; x++) {
     for (int y = 1; y < height-1; y++) {
-      a[x][y] = (v[x-1][y] + v[x+(-1)][y] + v[x+1][y-1] + v[x][y-1])/4 - v[x][y];
-    } //changed x and y values, affects angle of color bleed
-  }
-  for (int x = 1; x < width-1; x++) {
-    for (int y = 1; y < height-1; y++) {
-      v[x][y] += a[x][y];
-      z[x][y] += v[x][y];
-      pixels[width*y+x] = color(sin(z[x][y]) + 1, cos(z[x][y]), 2);
+      v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * 0.25 - z1[x][y];
+      v2[x][y] += (z2[x-1][y] + z2[x+1][y] + z2[x][y-1] + z2[x][y+1] + z1[x][y]) * 0.25 - z2[x][y];
     }
   }
-  oilslick.beginDraw();
-  oilslick.updatePixels();
-  oilslick.endDraw();
+  
+  for (int x = 1; x < width-1; x++) {
+    for (int y = 1; y < height-1; y++) {
+      z1[x][y] += v1[x][y];
+      z2[x][y] += v2[x][y];
+      z1[x][y] = constrain(z1[x][y], -1, 1);
+      z2[x][y] = constrain(z2[x][y], -1, 1);
+      pixels[width*y+x] = color(v1[x][y] + 1, v2[x][y] + 1, 2);
+    }
+
   
   //treez
    treez.beginDraw();
    treez.noStroke();
   for (int i=0;i<paths.length;i++) {
    PVector loc = paths[i].location;
-    treez.float diam = paths[i].diameter;
+   float diam = paths[i].diameter;
     treez.ellipse(loc.x, loc.y, diam, diam);
-    treez.paths[i].update();
+    paths[i].update();
   }
-  
+  //mechanical tree
   treez.stroke(70);
-  treez.fill(150);
-
-}
-
-void cracksfunction(){
+  treez.fill(100);
       for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){
@@ -112,9 +106,16 @@ void cracksfunction(){
     }
     }
     cracks[j].cChoice = 0;
- 
 }
-}
+
+treez.endDraw();
+  //draw both layers
+  image(treez,0,0);
+  image(oilslick,0,0);
+  
+} //enddraw
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void move() {
@@ -137,8 +138,10 @@ void keyPressed() {
   for (int x = 0; x < width; x++)    Arrays.fill(z[x], 0);
   for (int x = 0; x < width; x++)    Arrays.fill(v[x], 0);
   loop();
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
   void mousePressed() {
+    //mechanical tree
   background(0);
   paths = new pathfinder[1];
   paths[0] = new pathfinder();
@@ -149,4 +152,8 @@ void keyPressed() {
   if (k>=numCracks){
     k=0;
   }
+}
+void mouseMoved() {
+  v1[mouseX][mouseY] = randomGaussian();
+  v2[mouseX][mouseY] = randomGaussian();
 }
