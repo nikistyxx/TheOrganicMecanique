@@ -15,7 +15,7 @@ float stemVelY;
 float stemLife;
 float stemColor;
 float stemFruit;
-int deathCount = 0;
+int deathCount = 10;
 float diameter;
 
 PGraphics natTree;
@@ -26,6 +26,7 @@ PGraphics mechTree;
 void setup() {
 
   size(800, 600);
+  //pixelDensity(2);
   background(0);
   smooth();
   
@@ -65,7 +66,7 @@ void setup() {
 
 
 void draw() {
-<<<<<<< HEAD
+
   
  
   
@@ -91,10 +92,10 @@ void draw() {
   natTree.beginDraw();
   natTree.noStroke();
   natTree.fill(255);
-=======
+
   fill(255);
   noStroke();
->>>>>>> origin/master
+
   for (int i=0;i<paths.length;i++) {
     PVector loc = paths[i].location;
     float diam = paths[i].diameter;
@@ -104,15 +105,15 @@ void draw() {
   }
   natTree.endDraw();
   
-<<<<<<< HEAD
+
   
  //Mechanical Tree//////////////////////////////////////////////////////
  mechTree.beginDraw();
   mechTree.fill(100);
-=======
+
   stroke(70);
   fill(150);
->>>>>>> origin/master
+
     for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){

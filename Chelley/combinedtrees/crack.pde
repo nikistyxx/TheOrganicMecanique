@@ -24,7 +24,7 @@ class Crack{
   void plant(){
     cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
-    cLife = 1000 - deathCount;
+    cLife = 500 - deathCount;
     cSize = cLife/25;
     alive = true;
     cChoice = 0;
@@ -33,14 +33,14 @@ class Crack{
   
   void update(){
     if (alive){
-<<<<<<< HEAD
-      mechTree.fill(cColor);
+
+      mechTree.fill(255);
       mechTree.noStroke();
       mechTree.ellipse(cPos.x, cPos.y, cSize,cSize);
-=======
+
       fill(cColor);
       ellipse(cPos.x, cPos.y, cSize,cSize);
->>>>>>> origin/master
+
       /*
       cVel.x += (random(-.01,.01));
       cVel.y += (random(-.01,.01));
