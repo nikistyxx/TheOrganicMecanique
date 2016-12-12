@@ -24,7 +24,7 @@ class Crack{
   void plant(){
     cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
-    cLife = 1000 - deathCount;
+    cLife = 500 - deathCount;
     cSize = cLife/25;
     alive = true;
     cChoice = 0;
@@ -33,8 +33,14 @@ class Crack{
   
   void update(){
     if (alive){
+
+      mechTree.fill(255);
+      mechTree.noStroke();
+      mechTree.ellipse(cPos.x, cPos.y, cSize,cSize);
+
       fill(cColor);
       ellipse(cPos.x, cPos.y, cSize,cSize);
+
       /*
       cVel.x += (random(-.01,.01));
       cVel.y += (random(-.01,.01));
@@ -99,10 +105,10 @@ class Crack{
       /*strokeWeight(cSize);
       stroke(cColor-cLife/5,750-cLife/3,750-cLife/3);
       line(cPos.x,cPos.y,fPosX,+fPosY);*/
-      stroke(0);
+      //mechTree.stroke(0);
       
-      fill(fColor,800,800);
-      ellipse(stemPosX,stemPosY,cSize*4,cSize*4);
+      mechTree.fill(fColor,800,800);
+      mechTree.ellipse(stemPosX,stemPosY,cSize*4,cSize*4);
     }
     cPause = 20;
   }

@@ -4,7 +4,8 @@ class pathfinder {
   float diameter;
   
   pathfinder() {
-    fill(255);
+    //use this to change nat tree color
+    natTree.fill(255);
     location = new PVector(0, height);
     velocity = new PVector(0, -1);
     diameter = 32;
