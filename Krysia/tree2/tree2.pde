@@ -37,7 +37,7 @@ class pathfinder {
 
 pathfinder[] paths;
 void setup() {
-  size(800, 600);
+  size(1800, 1600);
   background(0);
   ellipseMode(CENTER);
   fill(255);
