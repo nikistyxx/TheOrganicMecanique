@@ -1,6 +1,6 @@
 import themidibus.*; //Import the library
+//MidiBus myBus; // The MidiBus
 MidiBus myBus; // The MidiBus
-MidiBus mb; // The MidiBus
 
 void setup() {
   size(400, 400);
@@ -23,7 +23,7 @@ void setup() {
   //                   |     |          |
   //myBus = new MidiBus(this, -1, "Java Sound Synthesizer"); 
   // Create a new MidiBus with no input device and the default Java Sound Synthesizer as the output device.
-  mb = new MidiBus(this, -1, "Virtual MIDI Bus");
+ myBus = new MidiBus(this, -1, 1);
 
 }
 
