@@ -1,7 +1,9 @@
 import themidibus.*; //Import the library
 //MidiBus myBus; // The MidiBus
 MidiBus myBus; // The MidiBus
-
+ 
+int[] channels = new int[5];
+int value = 0;
 void setup() {
   size(400, 400);
   background(0);
@@ -31,16 +33,25 @@ void draw() {
   int channel = 0;
   int pitch = 64;
   int velocity = 127;
+if (keyPressed){
 
-  myBus.sendNoteOn(channel, pitch, velocity); // Send a Midi noteOn
-  delay(200);
-  myBus.sendNoteOff(channel, pitch, velocity); // Send a Midi nodeOff
+  //myBus.sendNoteOn(channel, key, velocity); // Send a Midi noteOn
+  //delay(20);
+  //myBus.sendNoteOff(channel, key, velocity); // Send a Midi nodeOff
 
-  int number = 0;
-  int value = 90;
+for(int i = 0;i < channels.length;i++) {
+  myBus.sendNoteOn(channel+i, key+i, velocity); // Send a Midi noteOn
+  delay(20);
+  myBus.sendNoteOff(channel+i, key+i, velocity); // Send a Midi nodeOff
+  println("Chnnel:" +i);
+}
+}
 
-  myBus.sendControllerChange(channel, number, value); // Send a controllerChange
-  delay(2000);
+//  int number = 0;
+//  int value = 90;
+
+//  myBus.sendControllerChange(channel, number, value); // Send a controllerChange
+//  delay(2000);
 }
 
 void noteOn(int channel, int pitch, int velocity) {
