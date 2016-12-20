@@ -1,5 +1,3 @@
-//Oil slick
-float[][] z1, v1, z2, v2;
 
 
 pathfinder[] paths;
@@ -24,20 +22,12 @@ PGraphics mechTree;
 
 void setup() {
 
-  size(1800, 1600,P2D);
+  size(800, 600,P2D);
   //pixelDensity(2);
   background(0);
   smooth();
   frameRate(20);
-  
-//oil slick rgb double arrays
-  colorMode(RGB, 2);
-  z1 = new float[width][height];
-  v1 = new float[width][height];
-  z2 = new float[width][height];
-  v2 = new float[width][height];
 
-  
   natTree= createGraphics(width,height);
   mechTree= createGraphics(width,height);
   
@@ -69,35 +59,10 @@ void setup() {
 
 void draw() {
 
-//Oil Sick/////////////////////////////////////////////////////
-  loadPixels();
-
-  for (int x = 1; x < width-1; x++) {
-    for (int y = 1; y < height-1; y++) {
-      v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * .1 - z1[x][y];//miore
-      //v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * .25 - z1[x][y];//normal
-      //v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * .02 - z1[x][y];//gentle miore
-      //v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1]  + z1[x][y+1]) - (z1[x][y]);
-      v2[x][y] += (z2[x-1][y] + z2[x+1][y] + z2[x][y-1] + z2[x][y+1] + z1[x][y]) * 0.1 - z2[x][y];
-    }
-  }
-  
-  for (int x = 1; x < width-1; x++) {
-    for (int y = 1; y < height-1; y++) {
-      z1[x][y] += v1[x][y];
-      z2[x][y] += v2[x][y];
-      z1[x][y] = constrain(z1[x][y], -1, 1);
-      z2[x][y] = constrain(z2[x][y], -1, 1);
-      pixels[width*y+x] = color(0, v2[x][y] +1 , v1[x][y]+2,10 );
-      //pixels[width*y+x] = color(v2[x][y] , 1 , v1[x][y] );
-    }
-  }
-  
-  updatePixels();
 
   
   
-/*//Natural Tree//////////////////////////////////////////////////////
+//Natural Tree//////////////////////////////////////////////////////
   natTree.beginDraw();
   natTree.noStroke();
   natTree.fill(255);
@@ -153,17 +118,11 @@ void draw() {
   image(natTree,0,0);
   image(mechTree,0,0);
   //natTree.filter(BLUR,2);
-  */
-
+  
 }
 
 
 
-
-void mouseMoved() {
-  v1[mouseX][mouseY] = randomGaussian()*200;
-  v2[mouseX][mouseY] = randomGaussian()*200;
-}
 
 void mousePressed() {
   
