@@ -1,7 +1,10 @@
 
+ArrayList<Brush> brushes; //watercolor brush
+pathfinder[] paths; //natural tree
+Crack[] cracks;//mechanical tree
 
-pathfinder[] paths;
-Crack[] cracks;
+
+
 //all variables for digitaltree
 int numCracks = 100;
 int k = 0;
@@ -15,7 +18,7 @@ float stemFruit;
 int deathCount = 10;
 float diameter;
 
-PGraphics natTree;
+PGraphics natTree; 
 PGraphics mechTree;
 
 
@@ -23,13 +26,15 @@ PGraphics mechTree;
 void setup() {
 
   size(800, 600,P2D);
+  //fullScreen();
   //pixelDensity(2);
   background(0);
   smooth();
-  frameRate(20);
 
-  natTree= createGraphics(width,height);
-  mechTree= createGraphics(width,height);
+  brushes = new ArrayList<Brush>(); //brushes
+  natTree= createGraphics(width,height); //natural tree
+  mechTree= createGraphics(width,height); //mechanical tree
+
   
 //Natural Tree Initialize
   paths = new pathfinder[1];
@@ -43,8 +48,9 @@ void setup() {
     cracks[i] = new Crack(width,height,i);
   }
   
-    cracks[k].plant();
+  cracks[k].plant();
   k++;
+  
   if (k>=numCracks){
     k=0;
   }
@@ -59,6 +65,11 @@ void setup() {
 
 void draw() {
 
+//WaterColor Brush//////////////////////////////////////////////////////
+//Initializes brush characteristics, but does not physically add brushes
+ for (Brush brush : brushes) {
+    brush.paint();
+  }
 
   
   
@@ -114,10 +125,10 @@ void draw() {
   }
   mechTree.endDraw();
   
-  //blendMode(SUBTRACT);
+
   image(natTree,0,0);
   image(mechTree,0,0);
-  //natTree.filter(BLUR,2);
+
   
 }
 
@@ -125,11 +136,12 @@ void draw() {
 
 
 void mousePressed() {
+  //Adds new brush into array list
+  brushes.add(new Brush());
   
   //Draws Mechanical Tree
-  background(0);
-  paths = new pathfinder[1];
-  paths[0] = new pathfinder();
+
+
   
   cracks[k].plant();
   k++;
