@@ -2,7 +2,7 @@ import themidibus.*; //Import the library
 import codeanticode.syphon.*;
 
 ArrayList<Brush> brushes; //watercolor brush
-pathfinder[] paths; //natural tree
+
 Crack[] cracks;//mechanical tree
 SyphonServer server; //syphon
 MidiBus myBus; // The MidiBus
@@ -25,11 +25,11 @@ float stemFruit;
 int deathCount = 10;
 float diameter;
 
-PGraphics natTree; 
 PGraphics mechTree;
 
 
 void settings() {
+  //size(9920,720);
   size(800,800,P3D);
   PJOGL.profile=1;
 }
@@ -50,13 +50,9 @@ void setup() {
   smooth();
 
   brushes = new ArrayList<Brush>(); //brushes
-  natTree= createGraphics(width,height); //natural tree
   mechTree= createGraphics(width,height); //mechanical tree
 
-  
-//Natural Tree Initialize
-  paths = new pathfinder[1];
-  paths[0] = new pathfinder();
+
   
   
 //Mechanical Tree Initizalize
@@ -82,8 +78,7 @@ void setup() {
 
 
 void draw() {
-//MIDI//////////////////////////////////////////////////////
-  if (keyPressed) thread("sendNotes");
+
   
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
@@ -123,8 +118,10 @@ void draw() {
 
   
 
-
-
+  
+  if(frameCount%500==0) {
+    addPaint();
+  }
 
   server.sendScreen();
   
@@ -133,14 +130,15 @@ void draw() {
 
 
 
-void mousePressed() {
+void addPaint() {
+  
+  //midi
+  thread("sendNotes");
+  
   //Adds new brush into array list
   brushes.add(new Brush());
   
   //Draws Mechanical Tree
-
-
-  
   cracks[k].plant();
   k++;
   

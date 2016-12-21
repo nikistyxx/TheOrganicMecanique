@@ -8,10 +8,10 @@ class Brush {
 
   Brush() {
     angle = random(TWO_PI);
-    x = mouseX;
-    y = mouseY;
+    x = random(width);
+    y = random(height);
     clr = color(random(100,255), random(0,30), random(60,255), 5);
-     clr = color(random(100,120), random(0,10), random(60,255), 5);
+    clr = color(random(100,120), random(0,10), random(60,255), 5);
     components = new int[compVal];
     for (int i = 0; i < compVal; i++) {
       components[i] = compVal;

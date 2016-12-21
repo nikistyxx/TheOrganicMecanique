@@ -37,7 +37,7 @@ class Crack{
     
 
 
-      fill(230,);
+      fill(0);
       ellipse(cPos.x, cPos.y, cSize/4,cSize/4);
 
       /*
