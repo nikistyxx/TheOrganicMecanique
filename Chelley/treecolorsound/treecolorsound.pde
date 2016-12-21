@@ -93,36 +93,17 @@ void draw() {
 
   
   
-//Natural Tree//////////////////////////////////////////////////////
-  natTree.beginDraw();
-  natTree.noStroke();
-  natTree.fill(255);
 
-  fill(255);
-  noStroke();
-
-  for (int i=0;i<paths.length;i++) {
-    PVector loc = paths[i].location;
-    float diam = paths[i].diameter;
-    natTree.ellipse(loc.x, loc.y, diam, diam);
-    paths[i].update();
-    
-  }
-  natTree.endDraw();
-  
 
   
  //Mechanical Tree//////////////////////////////////////////////////////
-  mechTree.beginDraw();
-  mechTree.fill(100);
 
-  stroke(70);
-  fill(150);
+  fill(100,230,255);
 
     for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){
-      if(cracks[j].cLife < 750){
+      if(cracks[j].cLife < 350){
          cracks[j].turn();
        }
     }
@@ -136,18 +117,14 @@ void draw() {
          }
        }
     }
-    if (cracks[j].cChoice == 5){
-      if(cracks[j].cLife < 300){
-         //cracks[j].fruit();
-    }
-    }
+   
     cracks[j].cChoice = 0;
   }
-  mechTree.endDraw();
+
   
 
-  image(natTree,0,0);
-  image(mechTree,0,0);
+
+
 
   server.sendScreen();
   

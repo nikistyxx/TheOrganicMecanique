@@ -15,7 +15,7 @@ float stemVelY;
 float stemLife;
 float stemColor;
 float stemFruit;
-int deathCount = 10;
+int deathCount = 30;
 float diameter;
 
 PGraphics natTree; 

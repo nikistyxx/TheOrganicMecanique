@@ -14,7 +14,7 @@ class Crack{
   Crack(float cXtemp, float cYtemp, int cIDtemp){
     cPos = new PVector(width, height);
     cColor = 100;
-    fColor = random(1000);
+    fColor = 100;
     alive = false;
     cID = cIDtemp;
     cChoice = 0;
@@ -24,7 +24,7 @@ class Crack{
   void plant(){
     cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
-    cLife = 500 - deathCount;
+    cLife = 200 - deathCount;
     cSize = cLife/25;
     alive = true;
     cChoice = 0;
@@ -38,7 +38,7 @@ class Crack{
       mechTree.noStroke();
       mechTree.ellipse(cPos.x, cPos.y, cSize,cSize);
 
-      fill(cColor);
+      fill(cColor,0);
       ellipse(cPos.x, cPos.y, cSize,cSize);
 
       /*
@@ -46,7 +46,7 @@ class Crack{
       cVel.y += (random(-.01,.01));
       */
       cPos.add(cVel);
-      cLife -= 1;
+      cLife -= .02;
       cSize = cLife/25;
       cPause--;
       if (cPause <= 0){

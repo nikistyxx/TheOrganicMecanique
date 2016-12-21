@@ -13,7 +13,7 @@ class Crack{
   
   Crack(float cXtemp, float cYtemp, int cIDtemp){
     cPos = new PVector(width, height);
-    cColor = 100;
+    cColor = color(100,230,255);
     fColor = random(1000);
     alive = false;
     cID = cIDtemp;
@@ -25,7 +25,7 @@ class Crack{
     cPos = new PVector(width,height);
     cVel = new PVector(0,-1);
     cLife = 500 - deathCount;
-    cSize = cLife/25;
+    cSize = cLife/45;
     alive = true;
     cChoice = 0;
     cPause = 0;
@@ -34,19 +34,18 @@ class Crack{
   void update(){
     if (alive){
 
-      mechTree.fill(255);
-      mechTree.noStroke();
-      mechTree.ellipse(cPos.x, cPos.y, cSize,cSize);
+    
 
-      fill(cColor);
-      ellipse(cPos.x, cPos.y, cSize,cSize);
+
+      fill(230,);
+      ellipse(cPos.x, cPos.y, cSize/4,cSize/4);
 
       /*
       cVel.x += (random(-.01,.01));
       cVel.y += (random(-.01,.01));
       */
       cPos.add(cVel);
-      cLife -= 1;
+      cLife -= .02;
       cSize = cLife/25;
       cPause--;
       if (cPause <= 0){
@@ -97,19 +96,5 @@ class Crack{
     cChoice = 0;
     cPause = 20;
   }
-  void fruit(){
-    
-    for (int f =0; f<random(-2,5);f++){
-      float fPosX = cPos.x+random(-30,30);
-      float fPosY = cPos.y+random(-30,30);
-      /*strokeWeight(cSize);
-      stroke(cColor-cLife/5,750-cLife/3,750-cLife/3);
-      line(cPos.x,cPos.y,fPosX,+fPosY);*/
-      //mechTree.stroke(0);
-      
-      mechTree.fill(fColor,800,800);
-      mechTree.ellipse(stemPosX,stemPosY,cSize*4,cSize*4);
-    }
-    cPause = 20;
-  }
+
 }
