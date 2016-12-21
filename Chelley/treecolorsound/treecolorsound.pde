@@ -1,7 +1,14 @@
+import themidibus.*; //Import the library
+import codeanticode.syphon.*;
 
 ArrayList<Brush> brushes; //watercolor brush
 pathfinder[] paths; //natural tree
 Crack[] cracks;//mechanical tree
+SyphonServer server; //syphon
+MidiBus myBus; // The MidiBus
+
+
+int[] channels = new int[4];
 
 
 
@@ -22,10 +29,21 @@ PGraphics natTree;
 PGraphics mechTree;
 
 
+void settings() {
+  size(800,800,P3D);
+  PJOGL.profile=1;
+}
+
+
 
 void setup() {
 
-  size(800, 600,P2D);
+   server = new SyphonServer(this, "Processing Syphon");
+  frameRate(30);  
+  
+  MidiBus.list();
+  myBus = new MidiBus(this, -1, 1 );
+
   //fullScreen();
   pixelDensity(2);
   background(0);
@@ -64,7 +82,9 @@ void setup() {
 
 
 void draw() {
-
+//MIDI//////////////////////////////////////////////////////
+  if (keyPressed) thread("sendNotes");
+  
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
  for (Brush brush : brushes) {
@@ -129,6 +149,7 @@ void draw() {
   image(natTree,0,0);
   image(mechTree,0,0);
 
+  server.sendScreen();
   
 }
 
