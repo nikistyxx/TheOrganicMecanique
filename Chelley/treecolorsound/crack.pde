@@ -10,6 +10,7 @@ class Crack{
   float fColor;
   boolean alive;
   int cID;
+  int time;
   
   Crack(float cXtemp, float cYtemp, int cIDtemp){
     cPos = new PVector(width, height);
@@ -19,7 +20,8 @@ class Crack{
     cID = cIDtemp;
     cChoice = 0;
   }
-    //METHODS GO HERE
+  
+  //METHODS GO HERE
   //creates plant
   void plant(){
     cPos = new PVector(width,height);
@@ -29,13 +31,11 @@ class Crack{
     alive = true;
     cChoice = 0;
     cPause = 0;
+    time = millis();
   }
   
   void update(){
     if (alive){
-
-    
-
 
       fill(0);
       ellipse(cPos.x, cPos.y, cSize/4,cSize/4);
@@ -52,6 +52,12 @@ class Crack{
       cChoice = round(random(300));
       }
     }
+    if (millis() - time >= 45000){  //restarts every 45 sec
+      print("restart");
+      alive = false;
+      time = millis();
+    }
+    
     if (cLife < 0){
       alive = false;
     }

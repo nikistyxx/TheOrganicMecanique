@@ -1,10 +1,10 @@
 import themidibus.*; //Import the library
-import codeanticode.syphon.*;
+//import codeanticode.syphon.*;
 
 ArrayList<Brush> brushes; //watercolor brush
 
 Crack[] cracks;//mechanical tree
-SyphonServer server; //syphon
+//SyphonServer server; //syphon
 MidiBus myBus; // The MidiBus
 
 
@@ -38,7 +38,7 @@ void settings() {
 
 void setup() {
 
-   server = new SyphonServer(this, "Processing Syphon");
+  // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
   
   MidiBus.list();
@@ -123,7 +123,7 @@ void draw() {
     addPaint();
   }
 
-  server.sendScreen();
+  // server.sendScreen();
   
 }
 
