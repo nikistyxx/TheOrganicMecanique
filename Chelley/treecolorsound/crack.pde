@@ -52,6 +52,7 @@ class Crack{
       cChoice = round(random(300));
       }
     }
+    
     if (millis() - time >= 45000){  //restarts every 45 sec
       print("restart");
       alive = false;

@@ -69,6 +69,12 @@ void setup() {
     k=0;
   }
   
+  for (int j=0; j<cracks.length; j++){
+     if (cracks[j].alive == false){
+       //delete object 
+     }
+  }
+  
   
   
 }
