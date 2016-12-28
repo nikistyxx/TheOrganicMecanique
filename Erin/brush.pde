@@ -63,6 +63,6 @@ class Brush {
 
     x +=  cos(angle);
     y +=  sin(angle); 
-    angle += random(-0.45, 0.45); 
+    angle += random(-0.45, 0.45);  //setting to 1 will create solid, static blobs
   }
 }
