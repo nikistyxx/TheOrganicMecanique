@@ -31,7 +31,7 @@ class Crack{
     alive = true;
     cChoice = 0;
     cPause = 0;
-    time = millis();
+    //time = millis();
   }
   
   void update(){
@@ -53,11 +53,13 @@ class Crack{
       }
     }
     
+    /**
     if (millis() - time >= 45000){  //restarts every 45 sec
       print("restart");
       alive = false;
       time = millis();
     }
+    **/
     
     if (cLife < 0){
       alive = false;

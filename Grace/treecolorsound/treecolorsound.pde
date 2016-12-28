@@ -11,7 +11,6 @@ MidiBus myBus; // The MidiBus
 int[] channels = new int[4];
 
 
-
 //all variables for digitaltree
 int numCracks = 100;
 int k = 0;
@@ -42,7 +41,7 @@ void setup() {
   frameRate(30);  
   
   MidiBus.list();
-  myBus = new MidiBus(this, -1, 1 );
+  myBus = new MidiBus(this, -1, 1);
 
   //fullScreen();
   pixelDensity(2);
@@ -52,10 +51,8 @@ void setup() {
   brushes = new ArrayList<Brush>(); //brushes
   mechTree= createGraphics(width,height); //mechanical tree
 
-
-  
-  
-//Mechanical Tree Initizalize
+    
+//Mechanical Tree Initialize
   cracks = new Crack[numCracks];
   
   for(int i = 0;i<cracks.length; i++){
@@ -74,17 +71,11 @@ void setup() {
        //delete object 
      }
   }
-  
-  
-  
+   
 }
 
 
-
-
-
 void draw() {
-
   
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
@@ -93,11 +84,8 @@ void draw() {
   }
 
   
-  
 
-
-  
- //Mechanical Tree//////////////////////////////////////////////////////
+//Mechanical Tree//////////////////////////////////////////////////////
 
   fill(100,230,255);
 
@@ -121,19 +109,16 @@ void draw() {
    
     cracks[j].cChoice = 0;
   }
-
-  
-
   
   if(frameCount%500==0) {
     addPaint();
   }
 
-  // server.sendScreen();
+  // server.sendScreen();  
+  
+  
   
 }
-
-
 
 
 void addPaint() {
@@ -150,7 +135,5 @@ void addPaint() {
   
   if (k>=numCracks){
     k=0;
-  }
-  
-  
+  }  
 }
