@@ -13,7 +13,7 @@ class Brush {
 //and continue growing
 
   Brush() {
-    //timer = millis();
+    timer = millis();
     angle = random(TWO_PI);
     x = random(width);
     y = random(height);
@@ -33,7 +33,7 @@ class Brush {
     float y1 = y;
     float u = random(0.5, 1);
     
-    
+    // switches brush object from painting color to black after 30 sec - Grace
     if (millis() - timer >= 30000){
       num = 1;
     }
