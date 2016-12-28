@@ -19,7 +19,7 @@ class Brush {
     y = random(height);
     //clr = color(random(100,255), random(0,30), random(60,255), 5);
     clr = color(random(100,120), random(0,10), random(60,255), 5);
-    black = color(0);
+    black = color(0, 0, 0, 100);
     components = new int[compVal];
     for (int i = 0; i < compVal; i++) {
       components[i] = compVal;
@@ -36,6 +36,7 @@ class Brush {
     // switches brush object from painting color to black after 30 sec - Grace
     if (millis() - timer >= 30000){
       num = 1;
+      timer = millis();
     }
     
     switch(num){
@@ -45,7 +46,7 @@ class Brush {
         break;
       case 1:
         println("black");
-        //make a complete black screen then restart sketch
+        fill(black);
         break;
     }
   
