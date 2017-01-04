@@ -17,14 +17,12 @@ class Brush {
     //clr = color(random(100,255), random(0,30), random(60,255), 5);
     clr = color(random(100,120), random(0,10), random(60,255), 5);
     black = color(0);
+    //int[] components;
     components = new int[compVal];
     for (int i = 0; i < compVal; i++) {
       components[i] = compVal;
     }
-    // i don't know where to put this code
-    if (millis() - timer >= 60000){
-      components = null;
-    }
+    
   }
 
   void paint() {
@@ -52,6 +50,9 @@ class Brush {
     noStroke();    
 
     beginShape();
+    if (millis() - timer >= 60000){
+      background(0);
+    } 
     while (a < TWO_PI) {
       vertex(x1, y1); 
       float v = random(0.85, 1);
@@ -90,5 +91,5 @@ class Brush {
   }
 }
 
-
+//maybe put all of them in their own functions
     
