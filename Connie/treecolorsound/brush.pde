@@ -51,7 +51,12 @@ class Brush {
 
     beginShape();
     if (millis() - timer >= 60000){
-      background(0);
+      for (int i = components.size() - 1; i >= 0; i--){
+        components part = components.get(i);
+        if (part.finished()){
+          particles.remove(i);
+        }
+      }
     } 
     while (a < TWO_PI) {
       vertex(x1, y1); 
