@@ -10,6 +10,14 @@ MidiBus myBus; // The MidiBus
 
 int[] channels = new int[4];
 
+// variables for brush(color)
+color purple = color(random(100,120), random(0,10), random(60,255), 5);
+color blue = color(0, random(10, 70), random(60, 120), 4);
+color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
+color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
+color black = color(0, 0, 0, 100);
+
+
 
 //all variables for digitaltree
 int numCracks = 100;
@@ -23,6 +31,7 @@ float stemColor;
 float stemFruit;
 int deathCount = 10;
 float diameter;
+int timer;
 
 PGraphics mechTree;
 
@@ -36,7 +45,9 @@ void settings() {
 
 
 void setup() {
-
+  
+  timer = millis();
+  
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
   
@@ -80,7 +91,20 @@ void draw() {
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
  for (Brush brush : brushes) {
-    brush.paint();
+    if (millis() - timer <= 30000){
+      brush.paint(clr);
+      print(" color ");
+    }
+    else if (millis() - timer <= 60000){
+      brush.paint(black);
+      print(" black ");
+    }
+    else{
+      timer = millis();
+      print(" brush timer refresh ");
+    } 
+   
+   
   }
 
   

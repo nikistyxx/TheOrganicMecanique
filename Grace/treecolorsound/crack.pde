@@ -55,7 +55,7 @@ class Crack{
     
     // branch stops growing after 45 sec - Grace
     if (millis() - time >= 45000){  //restarts every 45 sec
-      print("restart");
+      print("restart trees");
       alive = false;
       time = millis();
     }

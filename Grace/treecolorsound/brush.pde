@@ -2,54 +2,30 @@ class Brush {
   float angle;
   int components[];
   float x, y;
-  color clr;
   int compVal = 2;
-  color clr2;
-  color black;
-  int timer;
   int num = 0;
   
-//problem: each brush object makes new blobs so the old blobs still exist
-//and continue growing
 
   Brush() {
-    timer = millis();
     angle = random(TWO_PI);
     x = random(width);
     y = random(height);
     //clr = color(random(100,255), random(0,30), random(60,255), 5);
-    clr = color(random(100,120), random(0,10), random(60,255), 5);
-    black = color(0, 0, 0, 100);
+    //clr = color(random(100,120), random(0,10), random(60,255), 5);
     components = new int[compVal];
     for (int i = 0; i < compVal; i++) {
       components[i] = compVal;
     }
   }
 
-  void paint() {
+  void paint(color clr) {
     float a = 0;
     float r = 0;
     float x1 = x;
     float y1 = y;
     float u = random(0.5, 1);
     
-    // switches brush object from painting color to black after 30 sec - Grace
-    if (millis() - timer >= 30000){
-      num = 1;
-      timer = millis();
-    }
-    
-    switch(num){
-      case 0:
-        fill(clr);
-        println("color");
-        break;
-      case 1:
-        println("black");
-        fill(black);
-        break;
-    }
-  
+    fill(clr);
     
     noStroke();    
 
@@ -66,7 +42,6 @@ class Brush {
     }
     endShape(CLOSE);
   pushMatrix();
-   fill(clr2);
     noStroke();  
     scale(.4);
     beginShape();
