@@ -11,7 +11,7 @@ MidiBus myBus; // The MidiBus
 int[] channels = new int[4];
 
 // variables for brush(color)
-color purple = color(random(100,120), random(0,10), random(60,255), 5);
+color clr = color(random(100,120), random(0,10), random(60,255), 5);
 color blue = color(0, random(10, 70), random(60, 120), 4);
 color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
 color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
