@@ -1,0 +1,197 @@
+ArrayList<Brush> brushes; //watercolor brush
+
+Crack[] cracks;//mechanical tree
+Crack2[] cracks2; //mirror tree
+
+//all variables for digitaltree
+int numCracks = 100;
+int k = 0;
+float stemPosX;
+float stemPosY;
+float stemVelX;
+float stemVelY;
+float stemLife;
+float stemColor;
+float stemFruit;
+int deathCount = 30;
+float diameter;
+ 
+ // variables for mirrorTree
+ int numCracks2 = 100;
+int k2 = 0;
+float stemPosX2;
+float stemPosY2;
+float stemVelX2;
+float stemVelY2;
+float stemLife2;
+float stemColor2;
+float stemFruit2;
+int deathCount2 = 30;
+float diameter2;
+ 
+ 
+PGraphics mechTree;
+
+
+
+void setup() {
+
+  size(1250, 500,P2D);
+  //fullScreen();
+  pixelDensity(1);
+  background(0);
+  smooth();
+
+  brushes = new ArrayList<Brush>(); //brushes
+
+  mechTree= createGraphics(width,height); //mechanical tree
+
+
+//Mechanical Tree Initizalize
+  cracks = new Crack[numCracks];
+  
+  for(int i = 0;i<cracks.length; i++){
+    cracks[i] = new Crack(width,height,i);
+  }
+  
+  cracks[k].plant();
+  k++;
+  
+  if (k>=numCracks){
+    k=0;
+  }
+
+  
+/// mirrorTree Initialize
+cracks2 = new Crack2[numCracks2];
+  
+  for(int i = 0;i<cracks2.length; i++){
+    cracks2[i] = new Crack2(width,height,i);
+  }
+  
+  cracks2[k].plant();
+  k++;
+  
+  if (k>=numCracks2){
+    k=0;
+  }
+}
+
+
+
+
+
+void draw() {
+
+//WaterColor Brush//////////////////////////////////////////////////////
+//Initializes brush characteristics, but does not physically add brushes
+ for (Brush brush : brushes) {
+    brush.paint();
+  }
+
+  
+  
+
+
+  
+ //Mechanical Tree//////////////////////////////////////////////////////
+  mechTree.beginDraw();
+  mechTree.fill(100);
+
+  stroke(70);
+  fill(150);
+
+  
+  
+  for (int j=0; j<numCracks; j++){
+    cracks[j].update();
+    if (cracks[j].cChoice == 1){
+      if(cracks[j].cLife < 750){
+         cracks[j].turn();
+       }
+    }
+    if (cracks[j].cChoice == 2||cracks[j].cChoice == 3){
+      if(cracks[j].cLife < 750){
+         cracks[j].stemSave();
+         cracks[k].stem();
+         k++;
+         if (k>=numCracks){
+           k=0;
+         }
+       }
+    }
+    if (cracks[j].cChoice == 5){
+      if(cracks[j].cLife < 300){
+         //cracks[j].fruit();
+    }
+    }
+    cracks[j].cChoice = 0;
+  }
+  
+  ////// mirrorTree
+   for (int j=0; j<numCracks2; j++){
+    cracks2[j].update();
+    if (cracks2[j].cChoice == 1){
+      if(cracks2[j].cLife < 750){
+         cracks2[j].turn();
+       }
+    }
+    if (cracks2[j].cChoice == 2||cracks2[j].cChoice == 3){
+      if(cracks2[j].cLife < 750){
+         cracks2[j].stemSave();
+         cracks2[k].stem();
+         k2++;
+         if (k>=numCracks2){
+           k2=0;
+         }
+       }
+    }
+    if (cracks[j].cChoice == 5){
+      if(cracks[j].cLife < 300){
+         //cracks[j].fruit();
+    }
+    }
+    cracks2[j].cChoice = 0;
+  }
+  
+  
+  mechTree.endDraw();
+  
+
+
+  image(mechTree,0,0);
+
+  
+}
+
+
+
+
+void mousePressed() {
+  //Adds new brush into array list
+  for (int i = 0; i < 3; i++)
+  {
+    brushes.add(new Brush());
+  }
+  
+  //Draws Mechanical Tree
+
+
+  
+  cracks[k].plant();
+  k++;
+  
+  if (k>=numCracks){
+    k=0;
+  }
+  
+  
+  /////mirrorTree
+  cracks[k].plant();
+  k++;
+  
+  if (k2>=numCracks2){
+    k2=0;
+  }
+
+}
