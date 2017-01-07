@@ -11,12 +11,19 @@ MidiBus myBus; // The MidiBus
 int[] channels = new int[4];
 
 // variables for brush(color)
+<<<<<<< HEAD
 color clr = color(random(100,120), random(0,10), random(60,255), 5);
 color clr2 = color(random(100,255), random(0,30), random(60,255), 5);
 color blue = color(0, random(10, 70), random(60, 120), 4);
 color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
 color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
 color black = color(0, 0, 0, 100);
+=======
+
+
+color fillColor[];
+
+>>>>>>> origin/master
 
 color myColorArray[] = {clr,blue,pastel1,pastel2};
 color rand = (int)random(myColorArray.length);
@@ -65,6 +72,11 @@ void setup() {
   brushes = new ArrayList<Brush>(); //brushes
   mechTree= createGraphics(width,height); //mechanical tree
 
+// initialize color array
+fillColor = new int[4];
+
+
+
     
 //Mechanical Tree Initialize
   cracks = new Crack[numCracks];
@@ -93,6 +105,7 @@ void draw() {
   
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
+<<<<<<< HEAD
 //uses a timer to change the color after a certain amount of time
  for (Brush brush : brushes) {
 <<<<<<< HEAD
@@ -102,6 +115,26 @@ void draw() {
     if (millis() - timer <= 300){
       brush.paint(rand);
       print(" color ");
+>>>>>>> origin/master
+=======
+
+int rand = (int)random(0,3);
+
+
+color black = color(0, 0, 0, 100);
+
+
+fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
+fillColor[1] = color(0, random(10, 70), random(60, 120), 5);
+fillColor[2] = color(random(100, 200), 190, random(100, 200), 4);
+fillColor[3] = color(random(100, 200), 150, random(100, 200), 4);
+
+
+ for (Brush brush : brushes) {
+   
+    if (millis() - timer <= 300){
+      brush.paint(fillColor[rand]);
+      print(rand);
 >>>>>>> origin/master
     }
     else if (millis() - timer <= 600){
