@@ -11,22 +11,12 @@ MidiBus myBus; // The MidiBus
 int[] channels = new int[4];
 
 // variables for brush(color)
-<<<<<<< HEAD
-color clr = color(random(100,120), random(0,10), random(60,255), 5);
-color clr2 = color(random(100,255), random(0,30), random(60,255), 5);
+color purple1 = color(random(100,120), random(0,10), random(60,255), 5);
+color purple2 = color(random(100,255), random(0,30), random(60,255), 5);
 color blue = color(0, random(10, 70), random(60, 120), 4);
 color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
 color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
 color black = color(0, 0, 0, 100);
-=======
-
-
-color fillColor[];
-
->>>>>>> origin/master
-
-color myColorArray[] = {clr,blue,pastel1,pastel2};
-color rand = (int)random(myColorArray.length);
 
 
 
@@ -42,7 +32,9 @@ float stemColor;
 float stemFruit;
 int deathCount = 10;
 float diameter;
+
 int timer;
+int rand;
 
 PGraphics mechTree;
 
@@ -56,7 +48,8 @@ void settings() {
 
 void setup() {
   
-  timer = millis();
+  int timer = millis();
+  int rand = (int)random(0,4);
   
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
@@ -68,17 +61,11 @@ void setup() {
   pixelDensity(2);
   background(0);
   smooth();
-
+  
   brushes = new ArrayList<Brush>(); //brushes
   mechTree= createGraphics(width,height); //mechanical tree
-
-// initialize color array
-fillColor = new int[4];
-
-
-
-    
-//Mechanical Tree Initialize
+ 
+  //Mechanical Tree Initialize
   cracks = new Crack[numCracks];
   
   for(int i = 0;i<cracks.length; i++){
@@ -96,8 +83,7 @@ fillColor = new int[4];
      if (cracks[j].alive == false){
        //delete object 
      }
-  }
-   
+  }   
 }
 
 
@@ -105,49 +91,35 @@ void draw() {
   
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
-<<<<<<< HEAD
 //uses a timer to change the color after a certain amount of time
- for (Brush brush : brushes) {
-<<<<<<< HEAD
-    if (millis() - timer <= 30000){
-      brush.paint(clr);
-=======
-    if (millis() - timer <= 300){
-      brush.paint(rand);
-      print(" color ");
->>>>>>> origin/master
-=======
-
-int rand = (int)random(0,3);
-
-
-color black = color(0, 0, 0, 100);
-
-
-fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
-fillColor[1] = color(0, random(10, 70), random(60, 120), 5);
-fillColor[2] = color(random(100, 200), 190, random(100, 200), 4);
-fillColor[3] = color(random(100, 200), 150, random(100, 200), 4);
-
 
  for (Brush brush : brushes) {
+    // initialize color array
+    int[] fillColor = new int[5];
+
+    fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
+    fillColor[1] = color(random(100,255), random(0,30), random(60,255), 5);
+    fillColor[2] = color(0, random(10, 70), random(60, 120), 5);
+    fillColor[3] = color(random(100, 200), 190, random(100, 200), 4);
+    fillColor[4] = color(random(100, 200), 150, random(100, 200), 4); 
    
-    if (millis() - timer <= 300){
+   
+    if (millis() - timer <= 30000){
       brush.paint(fillColor[rand]);
       print(rand);
->>>>>>> origin/master
     }
-    else if (millis() - timer <= 600){
+    else if (millis() - timer <= 60000){
       brush.paint(black);
     }
     else{
       timer = millis();
+      rand = (int)random(0,4);
     } 
   }
 
   
 
-//Mechanical Tree//////////////////////////////////////////////////////
+  //Mechanical Tree//////////////////////////////////////////////////////
 
   fill(100,230,255);
 

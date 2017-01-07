@@ -10,7 +10,6 @@ class Crack{
   float fColor;
   boolean alive;
   int cID;
-  int time;
   
   Crack(float cXtemp, float cYtemp, int cIDtemp){
     cPos = new PVector(width, height);
@@ -31,7 +30,6 @@ class Crack{
     alive = true;
     cChoice = 0;
     cPause = 0;
-    time = millis();
   }
   
   void update(){
@@ -52,15 +50,7 @@ class Crack{
       cChoice = round(random(300));
       }
     }
-    
-    // branch stops growing after 45 sec - Grace
-    if (millis() - time >= 45000){  //restarts every 45 sec
-      print("restart trees");
-      alive = false;
-      time = millis();
-    }
-    
-    
+        
     if (cLife < 0){
       alive = false;
     }
