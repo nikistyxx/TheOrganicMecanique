@@ -17,6 +17,9 @@ color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
 color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
 color black = color(0, 0, 0, 100);
 
+color myColorArray[] = {clr,blue,pastel1,pastel2};
+color rand = (int)random(myColorArray.length);
+
 
 
 //all variables for digitaltree
@@ -91,11 +94,11 @@ void draw() {
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
  for (Brush brush : brushes) {
-    if (millis() - timer <= 30000){
-      brush.paint(clr);
+    if (millis() - timer <= 300){
+      brush.paint(rand);
       print(" color ");
     }
-    else if (millis() - timer <= 60000){
+    else if (millis() - timer <= 600){
       brush.paint(black);
       print(" black ");
     }
