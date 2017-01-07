@@ -53,12 +53,7 @@ class Crack{
       }
     }
     
-    if (millis() - time >= 45000){  //restarts every 45 sec
-      print("restart");
-      alive = false;
-      time = millis();
-    }
-    
+  
     if (cLife < 0){
       alive = false;
     }
