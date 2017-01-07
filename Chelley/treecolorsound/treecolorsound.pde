@@ -91,7 +91,16 @@ void draw() {
 //Initializes brush characteristics, but does not physically add brushes
  for (Brush brush : brushes) {
     brush.paint();
+    
   }
+
+//deletes brushes out of the array
+int brushSize = brushes.size();
+println(brushSize);
+
+if (brushSize == 30){
+ brushes.clear(); 
+}
 
   
   

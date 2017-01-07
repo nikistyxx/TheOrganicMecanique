@@ -37,10 +37,10 @@ class Brush {
     switch(num){
       case 0:
         fill(clr);
-        println("color");
+        //println("color");
         break;
       case 1:
-        println("black");
+        //println("black");
         fill(black);
         break;
     }
