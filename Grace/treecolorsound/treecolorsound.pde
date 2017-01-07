@@ -7,18 +7,20 @@ Crack[] cracks;//mechanical tree
 //SyphonServer server; //syphon
 MidiBus myBus; // The MidiBus
 
-
 int[] channels = new int[4];
 
-// variables for brush(color)
+//variables for brush
+int timer;
+int rand;
+
+// variables for brush color
+int[] fillColor;
 color purple1 = color(random(100,120), random(0,10), random(60,255), 5);
 color purple2 = color(random(100,255), random(0,30), random(60,255), 5);
 color blue = color(0, random(10, 70), random(60, 120), 4);
 color pastel1 = color(random(100, 200), 150, random(100, 200), 4);
 color pastel2 = color(random(100, 200), 190, random(100, 200), 4);
 color black = color(0, 0, 0, 100);
-
-
 
 //all variables for digitaltree
 int numCracks = 100;
@@ -33,9 +35,6 @@ float stemFruit;
 int deathCount = 10;
 float diameter;
 
-int timer;
-int rand;
-
 PGraphics mechTree;
 
 
@@ -48,9 +47,6 @@ void settings() {
 
 void setup() {
   
-  int timer = millis();
-  int rand = (int)random(0,4);
-  
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
   
@@ -62,12 +58,25 @@ void setup() {
   background(0);
   smooth();
   
+  // initialize color array
+  fillColor = new int[5];
+  fillColor[0] = purple1;
+  fillColor[1] = purple2;
+  fillColor[2] = blue;
+  fillColor[3] = pastel1;
+  fillColor[4] = pastel2;
+  
+  //timer and random selector for color palletes
+  timer = millis();
+  rand = (int)random(0,4);
+  
   brushes = new ArrayList<Brush>(); //brushes
   mechTree= createGraphics(width,height); //mechanical tree
  
   //Mechanical Tree Initialize
   cracks = new Crack[numCracks];
   
+  //grow Mech Trees
   for(int i = 0;i<cracks.length; i++){
     cracks[i] = new Crack(width,height,i);
   }
@@ -81,7 +90,6 @@ void setup() {
   
   for (int j=0; j<cracks.length; j++){
      if (cracks[j].alive == false){
-       //delete object 
      }
   }   
 }
@@ -94,17 +102,8 @@ void draw() {
 //uses a timer to change the color after a certain amount of time
 
  for (Brush brush : brushes) {
-    // initialize color array
-    int[] fillColor = new int[5];
 
-    fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
-    fillColor[1] = color(random(100,255), random(0,30), random(60,255), 5);
-    fillColor[2] = color(0, random(10, 70), random(60, 120), 5);
-    fillColor[3] = color(random(100, 200), 190, random(100, 200), 4);
-    fillColor[4] = color(random(100, 200), 150, random(100, 200), 4); 
-   
-   
-    if (millis() - timer <= 30000){
+    if (millis() - timer <= 30000){ //30000milliseconds = 30sec
       brush.paint(fillColor[rand]);
       print(rand);
     }
@@ -118,7 +117,6 @@ void draw() {
   }
 
   
-
   //Mechanical Tree//////////////////////////////////////////////////////
 
   fill(100,230,255);
@@ -140,7 +138,6 @@ void draw() {
          }
        }
     }
-   
     cracks[j].cChoice = 0;
   }
   
@@ -163,7 +160,6 @@ void addPaint() {
   //Draws Mechanical Tree
   cracks[k].plant();
   k++;
-  
   if (k>=numCracks){
     k=0;
   }  
