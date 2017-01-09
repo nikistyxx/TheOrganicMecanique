@@ -9,6 +9,7 @@ MidiBus myBus; // The MidiBus
 
 
 int[] channels = new int[4];
+color fillColor[];
 
 
 
@@ -24,6 +25,7 @@ float stemColor;
 float stemFruit;
 int deathCount = 10;
 float diameter;
+int timer;
 
 PGraphics mechTree;
 
@@ -40,6 +42,8 @@ void setup() {
 
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
+    
+  timer = millis();
   
   MidiBus.list();
   myBus = new MidiBus(this, -1, 1 );
@@ -47,13 +51,14 @@ void setup() {
 
   //fullScreen();
   pixelDensity(2);
-  background(100);
+  background(0);
   smooth();
 
   brushes = new ArrayList<Brush>(); //brushes
   mechTree= createGraphics(width,height); //mechanical tree
 
-
+  // initialize color array
+  fillColor = new int[4];
   
   
 //Mechanical Tree Initizalize
@@ -87,20 +92,48 @@ void setup() {
 void draw() {
 
   
+
+
+  color black = color(0, 0, 0, 6);
+  color erase = color(0);
+  fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
+  fillColor[1] = color(0, random(10, 70), random(60, 120), 5);
+  fillColor[2] = color(random(100, 200), 190, random(100, 200), 4);
+  fillColor[3] = color(random(100, 200), 150, random(100, 200), 4);
+  
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
+
+
  for (Brush brush : brushes) {
-    brush.paint();
-    
+   int colorAdd = 0 ;
+   int colorVal = 0 + colorAdd;
+   
+     if (millis() - timer <= 30000){
+      //int rand = (int)random(0,3);
+      
+      brush.paint(fillColor[colorVal]);
+      println(colorVal);
+      }
+    else if (millis() - timer <= 60000){
+      brush.paint(black);
+      
+      print(" black ");
+      }
+    else{
+      timer = millis();
+      colorVal++;
+      print(" brush timer refresh ");
+      }    
   }
 
-//deletes brushes out of the array
-int brushSize = brushes.size();
-println(brushSize);
+    //deletes brushes out of the array
+    int brushSize = brushes.size();
+    println(brushSize);
 
-if (brushSize == 30){
- brushes.clear(); 
-}
+    if (brushSize == 30){
+       brushes.clear(); 
+      }
 
   
   

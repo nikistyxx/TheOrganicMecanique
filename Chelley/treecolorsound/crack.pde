@@ -24,11 +24,7 @@ class Crack{
   //METHODS GO HERE
   //creates plant
   void plant(){
-<<<<<<< HEAD
-    cPos = new PVector(300,height);//this is the initial plant position
-=======
     cPos = new PVector(random(width),height);//this is the initial plant position
->>>>>>> origin/master
     cVel = new PVector(0,-1); 
     cLife = 500 - deathCount;
     cSize = cLife/45;
