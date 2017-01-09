@@ -1,7 +1,17 @@
+
+import themidibus.*; //Import the library
+//import codeanticode.syphon.*;
+
 ArrayList<Brush> brushes; //watercolor brush
 
 Crack[] cracks;//mechanical tree
-Crack2[] cracks2; //mirror tree
+//SyphonServer server; //syphon
+MidiBus myBus; // The MidiBus
+
+
+int[] channels = new int[4];
+
+
 
 //all variables for digitaltree
 int numCracks = 100;
@@ -13,40 +23,40 @@ float stemVelY;
 float stemLife;
 float stemColor;
 float stemFruit;
-int deathCount = 30;
+int deathCount = 10;
 float diameter;
- 
- // variables for mirrorTree
- int numCracks2 = 100;
-int k2 = 0;
-float stemPosX2;
-float stemPosY2;
-float stemVelX2;
-float stemVelY2;
-float stemLife2;
-float stemColor2;
-float stemFruit2;
-int deathCount2 = 30;
-float diameter2;
- 
- 
+
 PGraphics mechTree;
+
+
+void settings() {
+  //size(9920,720);
+  size(800,800,P3D);
+  PJOGL.profile=1;
+}
 
 
 
 void setup() {
 
-  size(1250, 500,P2D);
+  // server = new SyphonServer(this, "Processing Syphon");
+  frameRate(30);  
+  
+  MidiBus.list();
+  myBus = new MidiBus(this, -1, 1 );
+  myBus.sendNoteOn(0,0,1);
+
   //fullScreen();
-  pixelDensity(1);
-  background(0);
+  pixelDensity(2);
+  background(100);
   smooth();
 
   brushes = new ArrayList<Brush>(); //brushes
-
   mechTree= createGraphics(width,height); //mechanical tree
 
 
+  
+  
 //Mechanical Tree Initizalize
   cracks = new Crack[numCracks];
   
@@ -60,21 +70,15 @@ void setup() {
   if (k>=numCracks){
     k=0;
   }
-
   
-/// mirrorTree Initialize
-cracks2 = new Crack2[numCracks2];
-  
-  for(int i = 0;i<cracks2.length; i++){
-    cracks2[i] = new Crack2(width,height,i);
+  for (int j=0; j<cracks.length; j++){
+     if (cracks[j].alive == false){
+       //delete object 
+     }
   }
   
-  cracks2[k].plant();
-  k++;
   
-  if (k>=numCracks2){
-    k=0;
-  }
+  
 }
 
 
@@ -83,11 +87,21 @@ cracks2 = new Crack2[numCracks2];
 
 void draw() {
 
+  
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
  for (Brush brush : brushes) {
     brush.paint();
+    
   }
+
+//deletes brushes out of the array
+int brushSize = brushes.size();
+println(brushSize);
+
+if (brushSize == 30){
+ brushes.clear(); 
+}
 
   
   
@@ -95,18 +109,13 @@ void draw() {
 
   
  //Mechanical Tree//////////////////////////////////////////////////////
-  mechTree.beginDraw();
-  mechTree.fill(100);
 
-  stroke(70);
-  fill(150);
+  fill(100,230,255);
 
-  
-  
-  for (int j=0; j<numCracks; j++){
+    for (int j=0; j<numCracks; j++){
     cracks[j].update();
     if (cracks[j].cChoice == 1){
-      if(cracks[j].cLife < 750){
+      if(cracks[j].cLife < 350){
          cracks[j].turn();
        }
     }
@@ -120,78 +129,45 @@ void draw() {
          }
        }
     }
-    if (cracks[j].cChoice == 5){
-      if(cracks[j].cLife < 300){
-         //cracks[j].fruit();
-    }
-    }
+   
     cracks[j].cChoice = 0;
   }
+
   
-  ////// mirrorTree
-   for (int j=0; j<numCracks2; j++){
-    cracks2[j].update();
-    if (cracks2[j].cChoice == 1){
-      if(cracks2[j].cLife < 750){
-         cracks2[j].turn();
-       }
-    }
-    if (cracks2[j].cChoice == 2||cracks2[j].cChoice == 3){
-      if(cracks2[j].cLife < 750){
-         cracks2[j].stemSave();
-         cracks2[k].stem();
-         k2++;
-         if (k>=numCracks2){
-           k2=0;
-         }
-       }
-    }
-    if (cracks[j].cChoice == 5){
-      if(cracks[j].cLife < 300){
-         //cracks[j].fruit();
-    }
-    }
-    cracks2[j].cChoice = 0;
+
+  
+  if(frameCount%500==0) {
+    addPaint();
   }
   
-  
-  mechTree.endDraw();
-  
-
-
-  image(mechTree,0,0);
-
+  if(frameCount%2000==0) {
+    addTree();
+  }
+  // server.sendScreen();
   
 }
 
 
 
 
-void mousePressed() {
+void addPaint() {
+  
+  //midi
+  thread("sendNotes");
+  
   //Adds new brush into array list
-  for (int i = 0; i < 3; i++)
-  {
-    brushes.add(new Brush());
-  }
+  brushes.add(new Brush());
+}
   
+  void addTree() {
   //Draws Mechanical Tree
-
-
-  
   cracks[k].plant();
   k++;
   
   if (k>=numCracks){
     k=0;
   }
-  
-  
-  /////mirrorTree
-  cracks[k].plant();
-  k++;
-  
-  if (k2>=numCracks2){
-    k2=0;
-  }
 
+  
+  
 }
