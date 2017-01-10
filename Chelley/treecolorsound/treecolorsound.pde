@@ -9,8 +9,10 @@ MidiBus myBus; // The MidiBus
 
 
 int[] channels = new int[4];
-  color fillColor[];
+color fillColor[];
 
+
+int brushAmt = 45;
 
 
 
@@ -33,8 +35,8 @@ PGraphics mechTree;
 
 
 void settings() {
-  //size(9920,720);
-  size(800,800,P3D);
+  size(9920,720,P3D);
+  //size(800,800,P3D);
   PJOGL.profile=1;
 }
 
@@ -42,7 +44,7 @@ void settings() {
 
 void setup() {
 
-   fillColor = new int[8];
+   fillColor = new int[10];
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
     
@@ -111,13 +113,13 @@ void draw() {
     int brushSize = brushes.size();
     println(brushSize);
 
-    if (brushSize == 45){
+    if (brushSize == brushAmt){
        brushes.clear(); 
        colorVal++;
        
        println(colorVal);
       }
-      if (colorVal == 7){
+      if (colorVal == 11){
        colorVal = 0; 
       }
 
