@@ -28,7 +28,7 @@ float stemFruit;
 int deathCount = 10;
 float diameter;
 int timer;
-
+int colorVal=0;
 PGraphics mechTree;
 
 
@@ -41,7 +41,8 @@ void settings() {
 
 
 void setup() {
-    fillColor = new int[4];
+
+   fillColor = new int[8];
   // server = new SyphonServer(this, "Processing Syphon");
   frameRate(30);  
     
@@ -95,28 +96,29 @@ void draw() {
   
 
 
-  color black = color(0, 0, 0, 6);
-  color erase = color(0);
-  //fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
-  //fillColor[1] = color(0, random(10, 70), random(60, 120), 5);
-  //fillColor[2] = color(random(100, 200), 190, random(100, 200), 4);
-  //fillColor[3] = color(random(100, 200), 150, random(100, 200), 4);
-  
+
 //WaterColor Brush//////////////////////////////////////////////////////
 //Initializes brush characteristics, but does not physically add brushes
 
 
- for (Brush brush : brushes) {
 
-      brush.paint();
+ for (Brush brush : brushes) {
+      
+      brush.paint(colorVal);
   }
 
     //deletes brushes out of the array
     int brushSize = brushes.size();
     println(brushSize);
 
-    if (brushSize == 30){
+    if (brushSize == 10){
        brushes.clear(); 
+       colorVal++;
+       
+       println(colorVal);
+      }
+      if (colorVal == 7){
+       colorVal = 0; 
       }
 
   
@@ -126,7 +128,7 @@ void draw() {
   
  //Mechanical Tree//////////////////////////////////////////////////////
 
-  fill(100,230,255);
+  fill(100,230,255,160);
 
     for (int j=0; j<numCracks; j++){
     cracks[j].update();

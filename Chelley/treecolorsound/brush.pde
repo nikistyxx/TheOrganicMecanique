@@ -10,10 +10,15 @@ class Brush {
 
 
   Brush() {
+    int alpha = 255;
     fillColor[0] = color(random(100,120), random(0,10), random(60,255), 5);
-    fillColor[1] = color(0, random(10, 70), random(60, 120), 5);
+    fillColor[1] = color(0,alpha);
     fillColor[2] = color(random(100, 200), 190, random(100, 200), 4);
-    fillColor[3] = color(random(100, 200), 150, random(100, 200), 4);
+    fillColor[3] = color(0,alpha);
+    fillColor[4] = color(0, random(10, 70), random(60, 120), 5);
+    fillColor[5] = color(0,alpha);
+    fillColor[6] = color(random(100, 200), 150, random(100, 200), 4);
+    fillColor[7] = color(0,alpha);
 
     angle = random(TWO_PI);
     x = random(width);
@@ -24,18 +29,19 @@ class Brush {
     for (int i = 0; i < compVal; i++) {
       components[i] = compVal;
     }
+    alpha = alpha++;
   }
   
 
-  void paint() {
+  void paint(int colorVal) {
 
     float a = 0;
     float r = 0;
     float x1 = x;
     float y1 = y;
     float u = random(0.5, 1);
-    
-    fill(fillColor[0]);
+    //blendMode(ADD);
+    fill(fillColor[colorVal]);
     
     noStroke();    
 
@@ -121,5 +127,6 @@ class Brush {
     x += 2 * cos(angle);
     y += 2 * sin(angle); 
     angle += random(-0.45, 0.45);
+    
   }
 }
