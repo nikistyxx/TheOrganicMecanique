@@ -32,6 +32,8 @@ float diameter;
 int timer;
 int colorVal=0;
 PGraphics mechTree;
+float brushX = random(width);
+float brushY = random(height);
 
 
 void settings() {
@@ -107,11 +109,22 @@ void draw() {
  for (Brush brush : brushes) {
       
       brush.paint(colorVal);
+      for (int i = 0; i < brushes.size(); i++){
+        float brushXVal = brushes.get(i).x; 
+        int speakerNumber = (int)map(brushXVal, 0,9920, 0, 127);
+          //midi
+        thread("sendNotes");
+        
+      }
+      
+      //println(brush.x); 
   }
 
+
+    //float xValofBrush= brushes.x; 
     //deletes brushes out of the array
     int brushSize = brushes.size();
-    println(brushSize);
+    //println(brushSize);
 
     if (brushSize == brushAmt){
        brushes.clear(); 
@@ -133,7 +146,7 @@ void draw() {
   fill(100,230,255,160);
 
     for (int j=0; j<numCracks; j++){
-    cracks[j].update();
+      cracks[j].update();
     if (cracks[j].cChoice == 1){
       if(cracks[j].cLife < 350){
          cracks[j].turn();
@@ -172,11 +185,11 @@ void draw() {
 
 void addPaint() {
   
-  //midi
-  thread("sendNotes");
+
   
   //Adds new brush into array list
   brushes.add(new Brush());
+ 
  
   
   
