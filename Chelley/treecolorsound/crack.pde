@@ -26,7 +26,7 @@ class Crack{
   void plant(){
     cPos = new PVector(random(width),height);//this is the initial plant position
     cVel = new PVector(0,-1); 
-    cLife = 500 - deathCount;
+    cLife = 300 - deathCount;
     cSize = cLife/45;
     alive = true;
     cChoice = 0;
@@ -45,7 +45,7 @@ class Crack{
       //cVel.y += (random(-.01,.01));
       
       cPos.add(cVel);
-      cLife -= .02;
+      cLife -= .01;
       cSize = cLife/25;
       cPause--;
       if (cPause <= 0){

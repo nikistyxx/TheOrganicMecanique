@@ -18,7 +18,7 @@ int brushAmt = 45;
 
 
 //all variables for digitaltree
-int numCracks = 50;
+int numCracks = 100;
 int k = 0;
 float stemPosX;
 float stemPosY;
@@ -81,12 +81,7 @@ void setup() {
     k=0;
   }
   
-  for (int j=0; j<cracks.length; j++){
-     if (cracks[j].alive == false){
-       //delete object 
-     }
-  }
-  
+
   
   
 }
@@ -111,9 +106,9 @@ void draw() {
       brush.paint(colorVal);
       for (int i = 0; i < brushes.size(); i++){
         float brushXVal = brushes.get(i).x; 
-        int speakerNumber = (int)map(brushXVal, 0,9920, 0, 127);
+        int speakerNumber = (int)map(brushXVal, 0,width, 0, 127);
           //midi
-        thread("sendNotes");
+        
         
       }
       
@@ -172,7 +167,7 @@ void draw() {
   if(frameCount%50==0) {
     addPaint();
   }
-   if(frameCount%500==0){
+   if(frameCount%100==0){
     addTree();  
   }
 
@@ -186,7 +181,8 @@ void draw() {
 void addPaint() {
   
 
-  
+  //sendNotes();
+  thread("sendNotes");
   //Adds new brush into array list
   brushes.add(new Brush());
  
