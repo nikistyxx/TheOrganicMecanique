@@ -1,6 +1,6 @@
 
 void sendNotes() {  
-  int channel = int(random(0,4));
+  int channel = int(random(0,9));
   int pitch = 64+int(random(0,10));
   int velocity = 127;
   int number = 0;
