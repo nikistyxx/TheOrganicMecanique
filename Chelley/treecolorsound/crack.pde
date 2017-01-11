@@ -11,6 +11,8 @@ class Crack{
   boolean alive;
   int cID;
   int time;
+  int yValue = new int[]{0, height}[(int)random(2)]; 
+  int branchChange = new int[]{-1,1}[(int)random(2)]; 
   
   Crack(float cXtemp, float cYtemp, int cIDtemp){
     cPos = new PVector(width, height);
@@ -24,15 +26,16 @@ class Crack{
   //METHODS GO HERE
   //creates plant
   void plant(){
-    cPos = new PVector(random(width),height);//this is the initial plant position
+    cPos = new PVector(random(width),yValue);//this is the initial plant position
     cVel = new PVector(0,-1); 
-    cLife = 300 - deathCount;
-    cSize = cLife/45;
+    cLife = 500 - deathCount;
+    cSize = cLife/25;
     alive = true;
     cChoice = 0;
     cPause = 0;
     time = millis();
   }
+
   
   void update(){
     if (alive){
@@ -45,8 +48,8 @@ class Crack{
       //cVel.y += (random(-.01,.01));
       
       cPos.add(cVel);
-      cLife -= .01;
-      cSize = cLife/25;
+      cLife -= .001;
+      cSize = cLife/20;
       cPause--;
       if (cPause <= 0){
       cChoice = round(random(300));
@@ -82,11 +85,11 @@ class Crack{
     stemColor = cColor;
     stemFruit = fColor;
     cChoice = 0;
-    cPause = 20;
+    cPause = 40;
   }
   void stem(){
     cPos = new PVector(stemPosX,stemPosY);
-    cVel = new PVector(-1*stemVelX,stemVelY);//stemVelX changes the direction of the crack
+    cVel = new PVector(branchChange*stemVelX,stemVelY);//stemVelX changes the direction of the crack
     if (round(random(0,1))==1){
       cVel.mult(1);
     }
@@ -96,7 +99,7 @@ class Crack{
     cSize = cLife/25;
     alive = true;
     cChoice = 0;
-    cPause = 20;
+    cPause = 40;
   }
 
 }

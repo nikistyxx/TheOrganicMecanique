@@ -12,13 +12,13 @@ int[] channels = new int[4];
 color fillColor[];
 
 
-int brushAmt = 45;
+int brushAmt = 80;
 
 
 
 
 //all variables for digitaltree
-int numCracks = 100;
+int numCracks = 70;
 int k = 0;
 float stemPosX;
 float stemPosY;
@@ -27,7 +27,7 @@ float stemVelY;
 float stemLife;
 float stemColor;
 float stemFruit;
-int deathCount = 10;
+int deathCount = 50;
 float diameter;
 int timer;
 int colorVal=0;
@@ -75,6 +75,7 @@ void setup() {
   }
   
   cracks[k].plant();
+
   k++;
   
   if (k>=numCracks){
@@ -119,7 +120,7 @@ void draw() {
     //float xValofBrush= brushes.x; 
     //deletes brushes out of the array
     int brushSize = brushes.size();
-    //println(brushSize);
+    println(brushSize);
 
     if (brushSize == brushAmt){
        brushes.clear(); 
@@ -164,10 +165,10 @@ void draw() {
   
 
   
-  if(frameCount%50==0) {
+  if(frameCount%100==0) {
     addPaint();
   }
-   if(frameCount%100==0){
+   if(frameCount%50==0){
     addTree();  
   }
 
@@ -196,6 +197,7 @@ void addTree() {
   
   //Draws Mechanical Tree
   cracks[k].plant();
+  
   k++;
   
   if (k>=numCracks){
