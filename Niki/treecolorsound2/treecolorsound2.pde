@@ -11,9 +11,9 @@ MidiBus myBus; // The MidiBus
 
 int[] channels = new int[4];
 color fillColor[];
-int brushAmt = 70;//moved from 80 to 70 for memory reasons/////////////
+int brushAmt = 70;//moved from 80 to 70 for memory reasons/////////////////////
 
-///////////all variables for digitaltree/////////////////////////////////
+///////////all variables for digitaltree/////////////////////////////////////////
 int numCracks = 70;
 int k = 0;
 float stemPosX, stemPosY, stemVelX, stemVelY, stemLife, stemColor, stemFruit, diameter;
@@ -71,9 +71,9 @@ void draw() {
       //speakerNumber = (int)map(brushXVal, 0, width, 127, 0);
     }
   }
-   
-  //float xValofBrush= brushes.x; 
-  //deletes brushes out of the array//////////////////////////////////////
+   //float xValofBrush= brushes.x; 
+  
+  //////deletes brushes out of the array//////////////////////////////////////
   int brushSize = brushes.size();
    println("size" + brushSize);
     println("amt" + brushAmt);
@@ -90,7 +90,8 @@ void draw() {
 if (a == true) { 
 drawthelines();} 
 println (a);
-//Draws tree and paint via framecount/////////////////////////////////////
+
+/////////////Draws tree and paint via framecount/////////////////////////////////////
   if (frameCount%100==0) {addPaint();}
   if (frameCount%50==0) {addTree();
       a = true; } // actvates the drawthelines function
@@ -99,7 +100,7 @@ println (a);
 /////SYPHON//////////////////////////////////////////////////////////
   server.sendScreen();
   
-} //draw function closer//////////////////////////////
+} //////////  draw function closer   //////////////////////////////
 
 
 ///////    ADDING PAINT and SENDING MIDI   //////////////////////////////////
@@ -111,14 +112,14 @@ brushes.add(new Brush());   //Adds new br ush into array list
    thread("sendNotes3");
 }
 
-/////////////////   Draws Mechanical Tree//////////////////////////////
+/////////////////   Draws Mechanical Tree   //////////////////////////////
 void addTree() {
   cracks[k].plant(); 
   k++;
   if (k>=numCracks) k=0;
 }
 
-////////////I HAVE NO F#CKING IDEA!?! I WISH EMOJIS WERE IN CODE//////////////
+////////////I HAVE NO IDEA!?! I WISH EMOJIS WERE IN CODE//////////////
 void delay(int time) {
   int current = millis();
   while (millis () < current+time) Thread.yield();
